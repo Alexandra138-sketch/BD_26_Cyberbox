@@ -1,0 +1,20 @@
+# Ambientes virtuais
+venv/
+env/
+.venv/
+
+# Ficheiros de ambiente (credenciais)
+.env
+
+# Ficheiros compilados de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Base de dados local do Django
+db.sqlite3
+
+# Ficheiros do sistema operativo
+.DS_Store
+Thumbs.db
