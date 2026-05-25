@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberBoxSecur - Segurança Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .primary-gradient {
+            background: linear-gradient(90deg, #9810fa 0%, #155dfc 50%, #00b8db 100%);
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(90deg, #9810fa 0%, #155dfc 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen">
+        <!-- HERO SECTION -->
+        <section class="relative overflow-hidden pt-[120px] pb-[80px]" style="background-color: #faf5ff;">
+            <!-- Ambient blobs -->
+            <div class="pointer-events-none absolute top-[81px] left-[51px] size-[500px] rounded-full blur-[64px]"
+                 style="background: linear-gradient(45deg, rgba(251,100,182,0.2) 0%, rgba(255,137,4,0.2) 50%, rgba(253,199,0,0.2) 100%);"></div>
+            <div class="pointer-events-none absolute top-[112px] right-0 size-[600px] rounded-full blur-[64px]"
+                 style="background: linear-gradient(135deg, rgba(194,122,255,0.3) 0%, rgba(81,162,255,0.3) 50%, rgba(0,211,243,0.3) 100%);"></div>
+            
+            <!-- Decorative images -->
+            <div class="pointer-events-none absolute top-[112px] right-0 h-[611px] w-[412px] overflow-hidden opacity-70">
+                <img src="{% static 'cyberbox/img/2c84661bc5b0baad9c2d533f01833d9f8e5ee6d8.png' %}" alt="" class="absolute w-[134%] h-[111%] top-[-5%] left-0 max-w-none">
+            </div>
+            <div class="pointer-events-none absolute top-[112px] left-0 h-[598px] w-[427px] overflow-hidden opacity-40">
+                <img src="{% static 'cyberbox/img/ff8e1242c6f1fed8bda773ceb092dbead2254930.png' %}" alt="" class="absolute w-[130%] h-[125%] top-[-13%] left-[-30%] max-w-none">
+            </div>
+
+            <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
+                <h1 class="text-[#101828] mb-6 leading-tight" style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600;">
+                    {{ content.hero.title }}
+                </h1>
+                <p class="text-[#4a5565] mb-10 max-w-2xl mx-auto leading-relaxed" style="font-size: clamp(1rem, 2vw, 1.25rem);">
+                    {{ content.hero.subtitle }}
+                </p>
+
+                <div class="flex items-center justify-center gap-4">
+                    <a href="/servicos" class="inline-flex items-center gap-2 h-[40px] px-5 rounded-[16px] text-sm font-semibold text-white shrink-0 primary-gradient">
+                        Explorar Serviços
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                    <a href="/contacto" class="inline-flex items-center justify-center h-[40px] px-5 rounded-[16px] text-sm font-semibold text-[#0a0a0a] bg-white border border-[#d1d5dc] hover:bg-gray-50 transition-colors">
+                        Agendar Serviços
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: #101828;" class="mb-3">
+                        <span class="text-gradient">{{ content.services.title }}</span>
+                    </h2>
+                    <p class="text-[#4a5565] text-lg max-w-xl mx-auto">
+                        {{ content.services.subtitle }}
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for service in services %}
+                    <div class="bg-white rounded-[16px] p-8 hover:shadow-lg transition-shadow" style="border: 1.6px solid rgba(0,0,0,0.1);">
+                        
+                        <div class="w-14 h-14 rounded-[16px] flex items-center justify-center mb-6"
+                             style="background: 
+                             {% if forloop.counter0|divisibleby:3 %}linear-gradient(135deg, #2b7fff 0%, #155dfc 100%)
+                             {% elif forloop.counter0|add:"-1"|divisibleby:3 %}linear-gradient(135deg, #f6339a 0%, #e60076 100%)
+                             {% else %}linear-gradient(135deg, #ad46ff 0%, #9810fa 100%){% endif %};">
+                            
+                            <!-- Placeholder Icon -->
+                            <svg class="size-7" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                                {% if service.icon == 'shield' %}
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                {% elif service.icon == 'alert' %}
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                {% elif service.icon == 'clipboard' %}
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                {% elif service.icon == 'monitor' %}
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                {% elif service.icon == 'book' %}
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                {% elif service.icon == 'cloud' %}
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                                {% else %}
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                {% endif %}
+                            </svg>
+                        </div>
+
+                        <div class="flex items-start justify-between gap-2 mb-3">
+                            <h3 class="text-[#101828] text-lg font-semibold leading-snug">{{ service.title }}</h3>
+                            {% if service.nis2Compliant %}
+                            <span class="shrink-0 text-xs px-2.5 py-0.5 rounded-full font-medium" style="background: #f3e8ff; color: #9810fa;">
+                                NIS2
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <p class="text-[#4a5565] text-sm leading-relaxed">{{ service.description }}</p>
+
+                        <a href="/servicos" class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium" style="color: #9810fa;">
+                            Saber mais 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="flex justify-center mt-10">
+                    <a href="/servicos" class="inline-flex items-center justify-center h-[40px] px-6 rounded-[16px] text-sm font-normal"
+                       style="background: #faf5ff; border: 1.6px solid #9810fa; color: #9810fa;">
+                        + Detalhes
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section class="relative overflow-hidden py-24" style="background-color: #faf5ff;">
+            <div class="pointer-events-none absolute top-[93px] right-0 h-[364px] w-[534px] rounded-full blur-[64px]"
+                 style="background: linear-gradient(34deg, rgba(251,100,182,0.2) 0%, rgba(255,137,4,0.2) 50%, rgba(253,199,0,0.2) 100%);"></div>
+            <div class="pointer-events-none absolute top-[249px] left-[-3px] h-[208px] w-[507px] rounded-full blur-[64px]"
+                 style="background: linear-gradient(158deg, rgba(194,122,255,0.3) 0%, rgba(81,162,255,0.3) 50%, rgba(0,211,243,0.3) 100%);"></div>
+
+            <div class="relative max-w-3xl mx-auto px-4 text-center">
+                <h2 class="text-black mb-5 leading-tight" style="font-size: clamp(1.75rem, 4vw, 3rem); font-weight: 600;">
+                    {{ content.cta.title }}
+                </h2>
+                <p class="text-black/70 text-lg mb-10 leading-relaxed">
+                    {{ content.cta.subtitle }}
+                </p>
+                <a href="/contacto" class="inline-flex items-center gap-2 h-[40px] px-5 rounded-[16px] text-sm font-semibold text-white shrink-0 primary-gradient">
+                    Agendar Serviços
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer style="background-color: #0d0f14;" class="text-gray-400 pt-16 pb-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-12 mb-12">
+                    <div class="flex flex-col gap-4">
+                        <img src="{% static 'cyberbox/img/5496fe3e161828c78b1e1af014089671f8a9a042.png' %}" alt="CyberBoxSecur" class="h-8 object-contain object-left">
+                        <p class="text-[#99a1af] text-sm leading-relaxed max-w-[232px]">
+                            Protegendo o seu negócio no mundo digital com soluções avançadas de cibersegurança.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-lg mb-5">Links Rápidos</h4>
+                        <ul class="space-y-3">
+                            <li><a href="/" class="text-[#d1d5dc] text-sm hover:text-white transition-colors">Início</a></li>
+                            <li><a href="/servicos" class="text-[#d1d5dc] text-sm hover:text-white transition-colors">Serviços</a></li>
+                            <li><a href="/contacto" class="text-[#d1d5dc] text-sm hover:text-white transition-colors">Contacto</a></li>
+                            <li><a href="/login" class="text-[#d1d5dc] text-sm hover:text-white transition-colors">Área Reservada</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-lg mb-5">Contacto</h4>
+                        <ul class="space-y-4 text-sm text-[#d1d5dc]">
+                            <li>info@cyberboxsecur.pt</li>
+                            <li>+351 210 000 000</li>
+                            <li>Lisboa, Portugal</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#99a1af]">
+                    <p>© 2025 CyberBoxSecur. Todos os direitos reservados.</p>
+                    <div class="flex items-center gap-5">
+                        <span class="hover:text-white cursor-pointer transition-colors">Política de Privacidade</span>
+                        <span class="text-[#9810fa] font-medium">NIS2 (UE) 2022/2555</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
